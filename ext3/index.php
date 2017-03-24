@@ -37,13 +37,13 @@
      {region:"center",title:"Center"}
      ]
      });*/
-    var pnNorth = new Ext.Panel({
+    var pnNorth = new Ext.Toolbar({
         id: 'pnNorth',
         autoWidth: true,
         heigth: 80,
         frame: true,
         region: 'north',
-        html: '这里放置页头内容'
+        html: '<div id="testPnNorth"></div>',
     });
     var pnWest = new Ext.Panel({
         id: 'pnWest',
@@ -52,6 +52,18 @@
         heigth: 'auto',
         split: true,//显示分隔条
         region: 'west',
+        collapsible: true
+    });
+    var pnEast = new Ext.Panel({
+        id: 'pnEast',
+        cls: 'pnEast',
+        title: '菜单项',
+        width: 200,
+        heigth: 'auto',
+        split: true,//显示分隔条
+        region: 'east',
+        bodyCssClass : 'pn-east-body',
+        html : '<div data-id="pn-east"></div>',
         collapsible: true
     });
     var pnCenter = new Ext.TabPanel({
@@ -66,14 +78,31 @@
             }
         ]
     });
+    pnNorth.add({
+        id:'atest',
+        icon: 'http://ys.qiche100.me.tt/Public/Images/n-home.gif',
+        cls: 'x-btn-icon',
+        tooltip: '<b>我的工作台</b><br>点击返回我的工作台。',
+        handler: function(){
+            var MainTabPanel = Ext.getCmp('MainTabPanel'); //得到tab组件
+            var tab = MainTabPanel.getComponent('MyDesktop'); //得到tab页
+            MainTabPanel.setActiveTab(tab);
+        }
+    });
     var vp = new Ext.Viewport({
         layout: "border",
         items: [
             pnNorth,
             pnWest,
+            pnEast,
             pnCenter
         ]
     });
+    /*Ext.onReady(function () {
+        Ext.get('pnWest').on('mouseover',function(){
+            alert(1)
+        })
+    })*/
 </script>
 </body>
 </html>
